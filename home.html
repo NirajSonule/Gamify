@@ -23,6 +23,9 @@
     <!-- Bebas neue -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+    <!-- Icon link -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+
     <!-- Custom css -->
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/home.css">
@@ -40,6 +43,42 @@
 
 </head>
 <body>
-    
+    <header class="header" data-header>
+        <div class="container">
+            <a href="/home.html" class="logo">
+                <img src="./assests/logo/logo-primary.svg" alt="Gamigy Logo" class="logo-primary">
+            </a>
+            <nav class="nav-container" id="navbar">
+                <div class="navbar-top">
+                    <a href="/home.html" class="logo">
+                        <img src="./assests/logo/logo-secondary.svg" alt="Gamigy Logo" class="logo-primary">
+                    </a>
+                    <button class="nav-open-btn" aria-label="close menu" data-nav-toggler>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+                    </button>
+                </div>
+                <ul class="nav-links">
+                    <li class="nav-link"><a href="/home.html">HOME</a></li>
+                    <li class="nav-link"><a href="#">EXPLORE</a></li>
+                    <li class="nav-link"><a href="#">ABOUT US</a></li>
+                    <li class="nav-link"><a href="#">CONTACT US</a></li>
+                </ul>
+                <button class="btn-primary">LOG IN / SIGNUP</button>
+            </nav>
+            <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+                <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+            </button>
+        </div>
+    </header>
+
+
+
+    <!-- Custom JS -->
+    <script src="./js/common.js"></script>
+    <script src="./js/home.js"></script>
+
+    <!-- ionicon -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
