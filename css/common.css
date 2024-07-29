@@ -30,6 +30,8 @@
     --fw-5: 800; /* extra bold */
     --fw-6: 900; /* black bold */
 
+    --section-padding: 80px;
+
 }
 
 *,
@@ -75,9 +77,12 @@ body{
     background-color: var(--rich-black);
     color: var(--white);
     font-size: var(--fs-1);
+    width: 100%;
 }
 
 body.nav-active{ overflow: hidden; }
+
+section{ padding-block: var(--section-padding); }
 
 .btn-primary{
     background-color: var(--cyber-yellow);
@@ -88,6 +93,19 @@ body.nav-active{ overflow: hidden; }
 
 .btn-primary:hover{
     background-color: #F4C60A;
+}
+
+.btn-secondary{
+    background-color: var(--dark-pastel-red);
+    color: var(--white);
+    padding: 10px 32px;
+    font-size: var(--fs-3);
+    font-weight: var(--fw-3);
+    margin-top: 158px;
+}
+
+.btn-secondary:hover{
+    background-color: #bf321c;
 }
 
 
@@ -200,7 +218,7 @@ body.nav-active{ overflow: hidden; }
 @media (min-width: 992px) {
 
     .container { 
-        max-width: 960px;
+        max-width: 892.5px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -223,7 +241,7 @@ body.nav-active{ overflow: hidden; }
         gap: 30px;
         font-size: var(--fs-1);
         font-weight: var(--fw-1);
-        margin-left: 98.5px;
+        margin-left: 77px;
     }
 
 }
