@@ -2,7 +2,7 @@
 
     /* Colors */
     --cyber-yellow: #FED000;
-    --lavender-indigo: #B651FF;
+    --lavender-indigo: #9747FF;
     --dark-pastel-red : #CE422B;
     --rich-black: #050C25;
     --light-black: #1E2020;
@@ -15,12 +15,12 @@
     --ff-bebas-neue: 'Bebas Neue', sans-serif;
 
     /* font size */
-    --fs-1: 1rem;
-    --fs-2: 1.125rem;
-    --fs-3: 1.5rem;
-    --fs-4: 2.25rem;
-    --fs-5: 2.5rem;
-    --fs-6: 2.875rem;    
+    --fs-1: 1rem; /* 16px */
+    --fs-2: 1.125rem; /* 18px */
+    --fs-3: 1.5rem; /* 24px */
+    --fs-4: 2.25rem; /* 36px */
+    --fs-5: 2.5rem; /* 40px */
+    --fs-6: 2.875rem; /* 48px */
     
     /* font weight */
     --fw-1: 400; /* regular */
@@ -120,6 +120,7 @@ section{ padding-block: var(--section-padding); }
     justify-content: center;
     align-items: center;
     padding-block: 0.75rem;
+    transition: all 0.1s ease;
 }
 
 .header.active{
