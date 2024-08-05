@@ -255,6 +255,7 @@ html, body{
 
 /* Testimonal Section */
 .testimonals-section{
+    margin-top: 80px;
     display: flex;
     justify-content: center;
     padding-block: 40px;
@@ -325,6 +326,7 @@ html, body{
 /* CTA Section */
 
 .cta-section{
+    margin-top: 80px;
     background-color: var(--lavender-indigo);
     display: flex;
     justify-content: center;
