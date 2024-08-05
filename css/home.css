@@ -253,6 +253,75 @@ html, body{
     grid-area: brand-8;
 }
 
+/* Testimonal Section */
+.testimonals-section{
+    display: flex;
+    justify-content: center;
+    padding-block: 40px;
+}
+
+.testimonals-container{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.card-1, .card-2, .card-3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--alabaster);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 1.5rem;
+}
+
+.card-img{
+    width: 3.375rem;
+    height: 3.375rem;
+    background-color: var(--lavender-indigo);
+    border-radius: 50%;
+    padding-top: 0.25rem;
+}
+
+.profile-name{
+    font-size: var(--fs-3);
+    font-weight: var(--fw-3);
+    color: var(--light-black);
+}
+
+.profile-prof{
+    font-size: var(--fs-1);
+    font-weight: var(--fw-2);
+    color: var(--grey-1);
+}
+
+.profile-review{
+    font-size: var(--fs-1);
+    font-weight: var(--fw-3);
+    color: var(--grey-2);
+}
+
+.stars{
+    margin-top: 2rem;
+    display: flex;
+    gap: 0.25rem;
+}
+
+.star{
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--cyber-yellow);
+}
+
 /* Media Queries */
 @media (min-width: 992px) {
     
@@ -368,6 +437,11 @@ html, body{
                              'brand-8 brand-8 brand-8';
         gap: 16px;
     }
+
+    .cards{
+        flex-direction: row;
+    }
+
 }
 
 @media (min-width: 1200px) {
@@ -485,6 +559,7 @@ html, body{
                              'brand-8 brand-8 brand-8';
         gap: 16px;
     }
+
 }
 
 @media (min-width: 1440px) {
@@ -601,4 +676,5 @@ html, body{
                              'brand-8 brand-8 brand-8';
         gap: 16px;
     }
+    
 }
