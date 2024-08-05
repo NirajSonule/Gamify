@@ -322,6 +322,51 @@ html, body{
     color: var(--cyber-yellow);
 }
 
+/* CTA Section */
+
+.cta-section{
+    background-color: var(--lavender-indigo);
+    display: flex;
+    justify-content: center;
+    padding-block: 40px;
+}
+
+.cta-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cta-bar{
+    display: flex;
+    justify-content: center;
+    color: var(--light-black);
+}
+
+.cta-section .section-title{
+    width: 300px;
+    text-align: center;
+}
+
+.cta-text{
+    width: 60%;
+    font-size: var(--fs-1);
+    font-weight: var(--fw-3);
+    background-color: var(--white);
+    padding: 8px;
+    outline: none;
+}
+
+.cta-btn{
+    font-size: var(--fs-1);
+    font-weight: var(--fw-3);
+    background-color: var(--cyber-yellow);
+    padding: 8px 16px;
+    width: max-content;
+}
+
+
 /* Media Queries */
 @media (min-width: 992px) {
     
@@ -440,6 +485,19 @@ html, body{
 
     .cards{
         flex-direction: row;
+    }
+
+    /* CTA Section */
+    .cta-section{
+        padding-block: 40px;
+    }
+
+    .cta-section .section-title{
+        width: 100%;
+    }
+
+    .cta-bar{
+        width: 650px;
     }
 
 }
@@ -676,5 +734,5 @@ html, body{
                              'brand-8 brand-8 brand-8';
         gap: 16px;
     }
-    
+
 }
