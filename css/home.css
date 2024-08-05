@@ -162,6 +162,96 @@ html, body{
     border-radius: 5px;
 }
 
+/* Brands Section */
+.brands-section{
+    background-color: var(--cyber-yellow);
+    display: flex;
+    justify-content: center;
+    padding-block: 40px;
+}
+
+.brands-container{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.brands-container .section-title{
+    color: var(--light-black);
+}
+
+.brands-name{
+    color: var(--dark-pastel-red);
+    font-size: var(--fs-3);
+    font-weight: var(--fw-3);
+    display: inline-block;
+}
+
+.brands-text{
+    color: var(--light-black);
+    font-size: var(--fs-3);
+    font-weight: var(--fw-3);
+}
+
+.brand-names{
+    margin-top: var(--fs-6);
+    display: grid;
+    grid-template-areas: 'brand-1 brand-2'
+                         'brand-3 brand-4'
+                         'brand-5 brand-6'
+                         'brand-7 brand-8';
+    gap: 16px;
+}
+
+.names{
+    color: var(--light-black);
+    font-size: var(--fs-3);
+    font-weight: var(--fw-2);
+    padding: 0.25rem 0.75rem;
+    border: 2px solid var(--dark-pastel-red);
+    border-radius: 0.5rem;
+}
+
+.names:hover{
+    background-color: var(--dark-pastel-red);
+    color: var(--alabaster);
+}
+
+
+.brand-1{
+    grid-area: brand-1;
+}
+
+.brand-2{
+    grid-area: brand-2;
+}
+
+.brand-3{
+    grid-area: brand-3;
+}
+
+.brand-4{
+    grid-area: brand-4;
+}
+
+.brand-5{
+    grid-area: brand-5;
+}
+
+.brand-6{
+    grid-area: brand-6;
+}
+
+.brand-7{
+    grid-area: brand-7;
+}
+
+.brand-8{
+    grid-area: brand-8;
+}
 
 /* Media Queries */
 @media (min-width: 992px) {
@@ -229,8 +319,8 @@ html, body{
     .games{
         display: grid;
         grid-template-areas: 'game-1 game-1 game-2'
-                                'game-1 game-1 game-3'
-                                'game-4 game-5 game-6';
+                             'game-1 game-1 game-3'
+                             'game-4 game-5 game-6';
     }
 
     .game-text{
@@ -261,6 +351,22 @@ html, body{
 
     .game-6:hover .game-text{
         display: block;
+    }
+    
+    /* Brands Section */
+
+    .brands-text{
+        width: 450px;
+    }
+    
+    .brand-names{
+        margin-top: var(--fs-6);
+        display: grid;
+        grid-template-areas: 'brand-1 brand-1 brand-1' 
+                             'brand-2 brand-3 brand-4'
+                             'brand-5 brand-6 brand-7'
+                             'brand-8 brand-8 brand-8';
+        gap: 16px;
     }
 }
 
@@ -330,8 +436,8 @@ html, body{
     .games{
         display: grid;
         grid-template-areas: 'game-1 game-1 game-2'
-                                'game-1 game-1 game-3'
-                                'game-4 game-5 game-6';
+                             'game-1 game-1 game-3'
+                             'game-4 game-5 game-6';
     }
 
     .game-text{
@@ -362,6 +468,22 @@ html, body{
 
     .game-6:hover .game-text{
         display: block;
+    }
+
+    /* Brands Section */
+
+    .brands-text{
+        width: 500px;
+    }
+    
+    .brand-names{
+        margin-top: var(--fs-6);
+        display: grid;
+        grid-template-areas: 'brand-1 brand-1 brand-1' 
+                             'brand-2 brand-3 brand-4'
+                             'brand-5 brand-6 brand-7'
+                             'brand-8 brand-8 brand-8';
+        gap: 16px;
     }
 }
 
@@ -462,5 +584,21 @@ html, body{
 
     .game-6:hover .game-text{
         display: block;
+    }
+
+    /* Brands Section */
+
+    .brands-text{
+        width: 600px;
+    }
+    
+    .brand-names{
+        margin-top: var(--fs-6);
+        display: grid;
+        grid-template-areas: 'brand-1 brand-1 brand-1' 
+                             'brand-2 brand-3 brand-4'
+                             'brand-5 brand-6 brand-7'
+                             'brand-8 brand-8 brand-8';
+        gap: 16px;
     }
 }
