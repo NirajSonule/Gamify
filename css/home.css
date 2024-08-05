@@ -213,6 +213,7 @@ html, body{
     padding: 0.25rem 0.75rem;
     border: 2px solid var(--dark-pastel-red);
     border-radius: 0.5rem;
+    cursor: pointer;
 }
 
 .names:hover{
