@@ -6,59 +6,74 @@ import discordIcon from "../assets/icons/discord-icon.svg";
 
 const Footer = () => {
   return (
-    <div className="bottom-0 left-0 w-full h-auto bg-gray-950 z-50 py-8">
-      <footer className="flex item-center justify-between px-4 sm:px-6 lg:px-8 ">
-        <div className="flex flex-col gap-6 ml-24">
-          <a href="/">
-            <img src={logo} alt="logo" className="h-8 w-auto" />
-          </a>
-          <p className="text-16-regular w-64">
-            Explore the world of pixelated glory!
-          </p>
-          <div className="flex items-center gap-x-4">
-            <a href="/">
-              <img src={facebookIcon} alt="facebook" className="h-6 w-auto" />
+    <div className="w-full bg-gray-950 py-8">
+      <footer className="px-4 sm:px-6 lg:px-8">
+        {/* Main Footer Content */}
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+          {/* Logo and Social Icons */}
+          <div className="flex flex-col items-center sm:items-start gap-6 sm:gap-4 ml-0 sm:ml-24">
+            <a href="/" className="mb-4">
+              <img src={logo} alt="logo" className="h-8 w-auto" />
             </a>
-            <a href="/">
-              <img src={instagramIcon} alt="instagram" className="h-6 w-auto" />
-            </a>
-            <a href="/">
-              <img src={twitterIcon} alt="twitter" className="h-6 w-auto" />
-            </a>
-            <a href="/">
-              <img src={discordIcon} alt="discord" className="h-6 w-auto" />
-            </a>
+            <p className="text-center sm:text-left text-white text-sm sm:text-base w-64 mb-4 sm:mb-0">
+              Explore the world of pixelated glory!
+            </p>
+            <div className="flex gap-4 justify-center sm:justify-start">
+              <a href="/" aria-label="Facebook">
+                <img src={facebookIcon} alt="Facebook" className="h-6 w-auto" />
+              </a>
+              <a href="/" aria-label="Instagram">
+                <img
+                  src={instagramIcon}
+                  alt="Instagram"
+                  className="h-6 w-auto"
+                />
+              </a>
+              <a href="/" aria-label="Twitter">
+                <img src={twitterIcon} alt="Twitter" className="h-6 w-auto" />
+              </a>
+              <a href="/" aria-label="Discord">
+                <img src={discordIcon} alt="Discord" className="h-6 w-auto" />
+              </a>
+            </div>
           </div>
-        </div>
-        <div className="flex justify-between gap-x-24 ml-auto mr-24">
-          <div className="flex flex-col gap-4 text-start">
-            <p className="text-16-regular text-slate-100">Platform</p>
-            <a href="/" className="text-white">
-              Home
-            </a>
-            <a href="/explore" className="text-white">
-              Explore
-            </a>
-            <a href="/about" className="text-white">
-              About
-            </a>
-          </div>
-          <div className="flex flex-col gap-4 text-start">
-            <p className="text-16-regular text-slate-100">Legal</p>
-            <a href="/policy" className="text-white">
-              Terms of Service
-            </a>
-            <a href="/policy" className="text-white">
-              Privacy Policy
-            </a>
-            <a href="/policy" className="text-white">
-              Cookie Policy
-            </a>
+
+          {/* Footer Links Section */}
+          <div className="flex flex-wrap justify-center sm:justify-between sm:ml-auto gap-8 sm:gap-24 mt-8 sm:mt-0 mr-0 sm:mr-24">
+            {/* Platform Links */}
+            <div className="flex flex-col items-center sm:items-start text-white gap-4">
+              <p className="text-lg font-medium text-slate-100">Platform</p>
+              <a href="/" className="text-white">
+                Home
+              </a>
+              <a href="/explore" className="text-white">
+                Explore
+              </a>
+              <a href="/about" className="text-white">
+                About
+              </a>
+            </div>
+
+            {/* Legal Links */}
+            <div className="flex flex-col items-center sm:items-start text-white gap-4">
+              <p className="text-lg font-medium text-slate-100">Legal</p>
+              <a href="/policy" className="text-white">
+                Terms of Service
+              </a>
+              <a href="/policy" className="text-white">
+                Privacy Policy
+              </a>
+              <a href="/policy" className="text-white">
+                Cookie Policy
+              </a>
+            </div>
           </div>
         </div>
       </footer>
-      <div className="flex items-center justify-center w-full h-auto mt-4">
-        <p>© 2024 Gamify All rights reserved</p>
+
+      {/* Copyright */}
+      <div className="mt-6 sm:mt-8 text-center text-white text-sm">
+        <p>© 2024 Gamify. All rights reserved.</p>
       </div>
     </div>
   );

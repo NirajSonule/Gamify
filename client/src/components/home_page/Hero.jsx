@@ -12,12 +12,12 @@ const Hero = () => {
       <div className="absolute inset-0 bg-cover bg-center filter blur-lg"></div>
       <div className="absolute flex items-center justify-center w-full h-full text-center text-white">
         <div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-6">
             Explore the world of
             <br />
             <span className="block text-amber-500">pixelated glory!</span>
           </h1>
-          <p className="text-lg md:text-xl mb-6 max-w-xl mx-auto">
+          <p className="text-sm sm:text-lg md:text-xl mb-6 max-w-xl mx-auto">
             Find the games according to your taste and PC specification.
           </p>
           <Link to="/explore">
