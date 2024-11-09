@@ -25,6 +25,12 @@ export const gameSchema = z.object({
 
 // Rating Validation Schema
 export const ratingSchema = z.object({
-  score: z.number().min(1).max(5, "Rating must be between 1 and 5"),
+  score: z
+    .number()
+    .min(1, "Rating must be between 1 and 5")
+    .max(5, "Rating must be between 1 and 5")
+    .refine((val) => val >= 1 && val <= 5, {
+      message: "Rating must be between 1 and 5",
+    }),
   comment: z.string().min(1, "Comment can't be empty").optional(),
 });

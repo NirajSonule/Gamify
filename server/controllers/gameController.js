@@ -2,7 +2,7 @@ import Game from "../models/Game.js";
 
 // Create a game (admin only)
 export const createGame = async (req, res) => {
-  const { title, genre, desciption, price, systemRequirements } = req.body;
+  const { title, genre, description, price, systemRequirements } = req.body;
 
   try {
     if (!title || !genre || !price || !systemRequirements) {
@@ -14,7 +14,7 @@ export const createGame = async (req, res) => {
     const newGame = new Game({
       title,
       genre,
-      description: desciption || "",
+      description: description || "",
       price,
       systemRequirements,
     });
@@ -81,8 +81,35 @@ export const getGame = async (req, res) => {
 
 // Get all the games
 export const getAllGames = async (req, res) => {
+  const { price, genre, cpu, gpu, ram, storage } = req.query;
+  const filter = {};
+
+  if (price) {
+    filter.price = { $lte: price };
+  }
+
+  if (genre) {
+    filter.genre = genre;
+  }
+
+  if (cpu) {
+    filter["systemRequirements.cpu"] = { $regex: cpu, $options: "i" };
+  }
+
+  if (gpu) {
+    filter["systemRequirements.gpu"] = { $regex: gpu, $options: "i" };
+  }
+
+  if (ram) {
+    filter["systemRequirements.ram"] = { $regex: ram, $options: "i" };
+  }
+
+  if (storage) {
+    filter["systemRequirements.storage"] = { $regex: storage, $options: "i" };
+  }
+
   try {
-    const games = await Game.find();
+    const games = await Game.find(filter);
     res.json(games);
   } catch (error) {
     console.log(error);

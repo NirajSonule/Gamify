@@ -11,74 +11,60 @@ const FeatureCard = ({
   switch (direction) {
     case "left":
       return (
-        <section className="w-full bg-gray-950 py-24 px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-16 items-center justify-between">
-            <div>
-              <h2 className="text-4xl font-bold mb-6">{heading}</h2>
-              <p className="text-14-regular md:text-16-regular mb-6">
+        <section className="w-full bg-gray-950 py-24 px-6 sm:px-8 lg:px-16">
+          <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-16 items-center justify-between">
+            <div className="w-full md:w-1/2 space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                {heading}
+              </h2>
+              <p className="text-base md:text-lg text-gray-300">
                 {description}
               </p>
-              <div>
-                <div className="flex gap-2">
-                  <CheckBadgeIcon className="h-12 w-12 text-amber-500" />
-                  <div>
-                    <h3 className="text-lg font-bold mb-4">{subheading}</h3>
-                    <p className="text-12-regular md:text-14-regular mb-6 text-gray-300">
-                      {subtext}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <CheckBadgeIcon className="h-12 w-12 text-amber-500" />
-                  <div>
-                    <h3 className="text-lg font-bold mb-4">{subheading}</h3>
-                    <p className="text-12-regular md:text-14-regular mb-6 text-gray-300">
-                      {subtext}
-                    </p>
-                  </div>
+              <div className="flex items-center space-x-4">
+                <CheckBadgeIcon className="h-14 w-14 text-amber-500" />
+                <div>
+                  <h3 className="text-xl font-semibold text-white">
+                    {subheading}
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-400">
+                    {subtext}
+                  </p>
                 </div>
               </div>
             </div>
             <img
               src={myImage}
               alt="hero_bg"
-              className="hidden md:block w-2/4 h-auto"
+              className="hidden md:block w-1/2 h-auto rounded-lg shadow-lg"
             />
           </div>
         </section>
       );
     case "right":
       return (
-        <section className="w-full bg-gray-950 py-24 px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-16 items-center justify-between">
+        <section className="w-full bg-gray-950 py-24 px-6 sm:px-8 lg:px-16">
+          <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-16 items-center justify-between">
             <img
               src={myImage}
               alt="hero_bg"
-              className="hidden md:block w-2/4 h-auto"
+              className="hidden md:block w-1/2 h-auto rounded-lg shadow-lg"
             />
-            <div>
-              <h2 className="text-4xl font-bold mb-6">{heading}</h2>
-              <p className="text-14-regular md:text-16-regular mb-6">
+            <div className="w-full md:w-1/2 space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                {heading}
+              </h2>
+              <p className="text-base md:text-lg text-gray-300">
                 {description}
               </p>
-              <div>
-                <div className="flex gap-2">
-                  <CheckBadgeIcon className="h-12 w-12 text-amber-500" />
-                  <div>
-                    <h3 className="text-lg font-bold mb-4">{subheading}</h3>
-                    <p className="text-12-regular md:text-14-regular mb-6 text-gray-300">
-                      {subtext}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <CheckBadgeIcon className="h-12 w-12 text-amber-500" />
-                  <div>
-                    <h3 className="text-lg font-bold mb-4">{subheading}</h3>
-                    <p className="text-12-regular md:text-14-regular mb-6 text-gray-300">
-                      {subtext}
-                    </p>
-                  </div>
+              <div className="flex items-center space-x-4">
+                <CheckBadgeIcon className="w-14 h-14 text-amber-500" />
+                <div>
+                  <h3 className="text-xl font-semibold text-white">
+                    {subheading}
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-400">
+                    {subtext}
+                  </p>
                 </div>
               </div>
             </div>
@@ -87,20 +73,20 @@ const FeatureCard = ({
       );
     default:
       return (
-        <section className="w-full bg-gray-950 py-24 px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-16 items-center justify-between">
-            <div>
-              <h2 className="text-4xl font-bold mb-6">
+        <section className="w-full bg-gray-950 py-24 px-6 sm:px-8 lg:px-16">
+          <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-16 items-center justify-between">
+            <div className="w-full md:w-1/2 space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
                 Explore the world of pixelated glory!
               </h2>
-              <p className="text-lg md:text-xl mb-6">
+              <p className="text-base md:text-lg text-gray-300">
                 Find the games according to your taste and PC specification.
               </p>
             </div>
             <img
               src={myImage}
               alt="hero_bg"
-              className="hidden lg:block w-2/4 h-auto"
+              className="hidden lg:block w-1/2 h-auto rounded-lg shadow-lg"
             />
           </div>
         </section>

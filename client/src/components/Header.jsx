@@ -19,6 +19,14 @@ const Header = () => {
     logout();
   };
 
+  const handleProfileClick = () => {
+    if (user.role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/profile");
+    }
+  };
+
   return (
     <div className="sticky top-0 left-0 w-full h-16 bg-gray-950 z-50 py-4">
       <header className="flex items-center justify-between h-full px-4 sm:px-6 lg:px-8 relative">
@@ -29,13 +37,22 @@ const Header = () => {
 
         {/* Center the nav using absolute positioning */}
         <nav className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-x-8">
-          <a href="/" className="text-white">
+          <a
+            href="/"
+            className="text-white hover:text-amber-500 transition duration-30"
+          >
             Home
           </a>
-          <a href="/explore" className="text-white">
+          <a
+            href="/explore"
+            className="text-white hover:text-amber-500 transition duration-30"
+          >
             Explore
           </a>
-          <a href="/about" className="text-white">
+          <a
+            href="/about"
+            className="text-white hover:text-amber-500 transition duration-30"
+          >
             About
           </a>
         </nav>
@@ -44,8 +61,12 @@ const Header = () => {
         <div className="flex items-center gap-x-2 ml-auto mr-24">
           {user ? (
             <>
-              <span className="text-white mr-4">{user.role}</span>{" "}
-              {/* Display user role or username */}
+              <ButtonComponent
+                className="bg-gray-500 hover:bg-gray-600 text-white mr-4"
+                onClick={handleProfileClick}
+              >
+                {user.username.toUpperCase()}
+              </ButtonComponent>
               <ButtonComponent
                 onClick={handleLogoutClick}
                 className="bg-red-500 hover:bg-red-600"

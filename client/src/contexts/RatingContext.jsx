@@ -10,12 +10,17 @@ export const RatingProvider = ({ children }) => {
   const addRating = async (gameId, ratingData) => {
     const result = ratingSchema.safeParse(ratingData);
     if (!result.success) {
+      console.log("Validation errors", result.error.format());
       return result.error.format();
     }
     try {
-      const response = await axios.post(`/games/${gameId}/rating`, ratingData, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
+      const response = await axios.post(
+        `http://localhost:3000/games/${gameId}/rating`,
+        ratingData,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       console.log(response.data.message);
     } catch (error) {
       console.error(error.response.data.message);
@@ -24,7 +29,12 @@ export const RatingProvider = ({ children }) => {
 
   const getGameRatings = async (gameId) => {
     try {
-      const response = await axios.get(`/games/${gameId}/ratings`);
+      const response = await axios.get(
+        `http://localhost:3000/games/${gameId}/ratings`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       setRatings(response.data.ratings);
     } catch (error) {
       console.error(error.response.data.message);

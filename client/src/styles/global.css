@@ -142,7 +142,7 @@
   }
 
   .shad-gray-btn {
-    @apply border border-dark-500 cursor-pointer bg-dark-400 text-white !important;
+    @apply border border-black cursor-pointer bg-black text-white !important;
   }
 
   .shad-input-label {

@@ -3,9 +3,10 @@ import Rating from "../models/Rating.js";
 import Game from "../models/Game.js";
 
 export const addRating = async (req, res) => {
+  console.log("req.user in controller", req.user);
   const { score, comment } = req.body;
   const { gameId } = req.params;
-  const { userId } = req.user.id;
+  const { userId } = req.user.userId;
 
   try {
     const game = await Game.findById(gameId);
