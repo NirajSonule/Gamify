@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useGame } from "../contexts/GameContext";
 import { useRating } from "../contexts/RatingContext";
 import { useAuth } from "../contexts/AuthContext";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Import shadcn card components
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const GameDetails = () => {
   const { id } = useParams();
@@ -27,7 +27,6 @@ const GameDetails = () => {
     setComment("");
   };
 
-  // Check if game data is still loading
   if (!game) {
     return <div>Loading...</div>;
   }
@@ -37,7 +36,7 @@ const GameDetails = () => {
       {/* Cover Image */}
       <div className="relative w-full h-80 overflow-hidden">
         <img
-          src={`https://via.placeholder.com/1920x1080?text=${game.title}`}
+          src={`http://localhost:3000/uploads/${game.image}`}
           alt={game.title}
           className="object-cover mx-auto w-[60%] h-full rounded-md"
         />
@@ -71,7 +70,7 @@ const GameDetails = () => {
         </div>
       </div>
 
-      {/* Rating Box (Using shadcn Card) */}
+      {/* Rating Box*/}
       {user && (
         <div className="max-w-4xl mx-auto mt-8">
           <Card className="text-white bg-gray-900">

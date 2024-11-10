@@ -40,18 +40,32 @@ export const GameProvider = ({ children }) => {
     }
   };
 
-  const createGame = async (gameData) => {
+  const createGame = async (formData) => {
+    // Extract non-file data
+    const gameData = {
+      title: formData.get("title"),
+      genre: formData.get("genre"),
+      description: formData.get("description"),
+      price: parseFloat(formData.get("price")),
+      systemRequirements: JSON.parse(formData.get("systemRequirements")),
+      image: formData.get("image"),
+    };
+
     const result = gameSchema.safeParse(gameData);
     if (!result.success) {
-      return result.error.format();
+      console.error("Validation failed:", result.error.format());
+      return;
     }
+
     try {
-      console.log("Creating game with data from context:", gameData);
       const response = await axios.post(
         "http://localhost:3000/games",
         gameData,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
       console.log("Game Created", response.data.message);
@@ -64,21 +78,34 @@ export const GameProvider = ({ children }) => {
     }
   };
 
-  const updateGame = async (id, gameData) => {
+  const updateGame = async (id, formData) => {
+    const gameData = {
+      title: formData.get("title"),
+      genre: formData.get("genre"),
+      description: formData.get("description"),
+      price: parseFloat(formData.get("price")),
+      systemRequirements: JSON.parse(formData.get("systemRequirements")),
+      image: formData.get("image"),
+    };
+
     const result = gameSchema.safeParse(gameData);
     if (!result.success) {
-      return result.error.format();
+      console.error("Validation failed:", result.error.format());
+      return;
     }
+
     try {
-      console.log("Updating game with data from context:", gameData);
       const response = await axios.put(
         `http://localhost:3000/games/${id}`,
-        gameData,
+        formData,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
-      console.log(response.data.message);
+      console.log("Game Updated", response.data.message);
       getAllGames();
     } catch (error) {
       console.error(

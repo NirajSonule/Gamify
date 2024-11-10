@@ -1,5 +1,6 @@
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
-import myImage from "../../assets/hero/hero_bg.png";
+import left_img from "../../assets/feature_card/feature_card_left.jpg";
+import right_img from "../../assets/feature_card/feature_card_right.jpeg";
 
 const FeatureCard = ({
   direction,
@@ -33,7 +34,7 @@ const FeatureCard = ({
               </div>
             </div>
             <img
-              src={myImage}
+              src={left_img}
               alt="hero_bg"
               className="hidden md:block w-1/2 h-auto rounded-lg shadow-lg"
             />
@@ -45,7 +46,7 @@ const FeatureCard = ({
         <section className="w-full bg-gray-950 py-24 px-6 sm:px-8 lg:px-16">
           <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-16 items-center justify-between">
             <img
-              src={myImage}
+              src={right_img}
               alt="hero_bg"
               className="hidden md:block w-1/2 h-auto rounded-lg shadow-lg"
             />

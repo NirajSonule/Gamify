@@ -1,14 +1,11 @@
 const Modal = ({ isOpen, onClose, title, content }) => {
-  if (!isOpen) return null; // Don't render the modal if it's not open
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-gray-900 text-white rounded-lg shadow-lg w-full sm:w-96 p-6 relative">
-        {/* Modal Title */}
         <h2 className="text-xl font-semibold text-gray-100 mb-4">{title}</h2>
-        {/* Modal Content */}
         <div className="text-gray-200 text-sm space-y-4 mb-6">{content}</div>
-        {/* Close Button */}
         <button
           className="absolute top-2 right-2 text-gray-200 hover:text-white"
           onClick={onClose}

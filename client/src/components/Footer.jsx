@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../assets/logo/logo.svg";
 import facebookIcon from "../assets/icons/facebook-icon.svg";
 import instagramIcon from "../assets/icons/instagram-icon.svg";
 import twitterIcon from "../assets/icons/twitter-icon.svg";
 import discordIcon from "../assets/icons/discord-icon.svg";
-import Modal from "./Modal"; // Import the modal component
+import Modal from "./Modal";
 
 const Footer = () => {
-  // Modal state management for each legal link
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
 
-  // Modal content for Terms of Service, Privacy Policy, and Cookie Policy
   const termsContent = (
     <>
       <h3 className="font-semibold">1. Introduction</h3>

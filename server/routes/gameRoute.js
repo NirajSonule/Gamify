@@ -8,11 +8,24 @@ import {
 } from "../controllers/gameController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 import adminMiddleware from "../middlewares/adminMiddleware.js";
+import { upload } from "../utils/multer.js";
 
 const router = express.Router();
 
-router.post("/games", authMiddleware, adminMiddleware, createGame);
-router.put("/games/:id", authMiddleware, adminMiddleware, updateGame);
+router.post(
+  "/games",
+  authMiddleware,
+  adminMiddleware,
+  upload.single("image"),
+  createGame
+);
+router.put(
+  "/games/:id",
+  authMiddleware,
+  adminMiddleware,
+  upload.single("image"),
+  updateGame
+);
 router.delete("/games/:id", authMiddleware, adminMiddleware, deleteGame);
 
 router.get("/games/:id", authMiddleware, getGame);

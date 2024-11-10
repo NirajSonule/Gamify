@@ -102,6 +102,7 @@ const Explore = () => {
             genre={game.genre}
             price={game.price}
             description={game.description}
+            image={game.image}
           />
         ))}
       </div>

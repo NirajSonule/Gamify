@@ -47,7 +47,10 @@ const gameSchema = new mongoose.Schema(
         required: true,
       },
     },
-    image: { type: String },
+    image: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );

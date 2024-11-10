@@ -15,16 +15,15 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  // Use useEffect to update the context when the token changes (login/logout)
   useEffect(() => {
     if (user) {
       localStorage.setItem("token", user.token);
       localStorage.setItem("role", user.role);
-      localStorage.setItem("username", user.username); // Store username
+      localStorage.setItem("username", user.username);
     } else {
       localStorage.removeItem("token");
       localStorage.removeItem("role");
-      localStorage.removeItem("username"); // Remove username on logout
+      localStorage.removeItem("username");
     }
   }, [user]);
 
@@ -57,11 +56,11 @@ export const AuthProvider = ({ children }) => {
         "http://localhost:3000/auth/login",
         credentials
       );
-      const { token, role, username } = response.data; // Get username from response
+      const { token, role, username } = response.data;
 
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
-      localStorage.setItem("username", username); // Store username in localStorage
+      localStorage.setItem("username", username);
 
       const userObject = {
         token,
@@ -70,7 +69,7 @@ export const AuthProvider = ({ children }) => {
       };
 
       console.log(userObject);
-      setUser(userObject); // Update user state with username
+      setUser(userObject);
       navigate("/");
 
       return null;
@@ -82,7 +81,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    localStorage.removeItem("username"); // Remove username on logout
+    localStorage.removeItem("username");
     setUser(null);
     navigate("/");
   };

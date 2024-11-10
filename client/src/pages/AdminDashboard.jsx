@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useGame } from "../contexts/GameContext";
-import { useNavigate } from "react-router-dom";
 import ButtonComponent from "@/components/Button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,29 +13,79 @@ const AdminDashboard = () => {
     description: "",
     price: "",
     systemRequirements: { cpu: "", gpu: "", ram: "", storage: "" },
+    image: null,
   });
 
-  const navigate = useNavigate();
+  const handleFileChange = (e) => {
+    setNewGameData({
+      ...newGameData,
+      image: e.target.files[0],
+    });
+  };
 
   useEffect(() => {
     getAllGames();
   }, [getAllGames]);
 
   const handleCreateGame = async () => {
-    const response = await createGame(newGameData);
-    setNewGameData({
-      title: "",
-      genre: "",
-      description: "",
-      price: "",
-      systemRequirements: { cpu: "", gpu: "", ram: "", storage: "" },
-    });
-    console.log(response);
+    const formData = new FormData();
+
+    formData.append("title", newGameData.title);
+    formData.append("genre", newGameData.genre);
+    formData.append("description", newGameData.description);
+    formData.append("price", newGameData.price);
+    formData.append(
+      "systemRequirements",
+      JSON.stringify(newGameData.systemRequirements)
+    );
+
+    if (newGameData.image) {
+      formData.append("image", newGameData.image);
+    }
+
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}`, value);
+    }
+
+    try {
+      const response = await createGame(formData);
+      setNewGameData({
+        title: "",
+        genre: "",
+        description: "",
+        price: "",
+        systemRequirements: { cpu: "", gpu: "", ram: "", storage: "" },
+        image: null,
+      });
+      console.log(response);
+    } catch (error) {
+      console.error("Error creating game", error);
+    }
   };
 
   const handleUpdateGame = async (id) => {
-    const updatedData = { ...newGameData };
-    await updateGame(id, updatedData);
+    const formData = new FormData();
+
+    formData.append("title", newGameData.title);
+    formData.append("genre", newGameData.genre);
+    formData.append("description", newGameData.description);
+    formData.append("price", newGameData.price.toString());
+    formData.append(
+      "systemRequirements",
+      JSON.stringify(newGameData.systemRequirements)
+    );
+
+    if (newGameData.image) {
+      formData.append("image", newGameData.image);
+    }
+
+    try {
+      const response = await updateGame(id, formData);
+      console.log("Game updated", response);
+      getAllGames();
+    } catch (error) {
+      console.error("Error updating game", error);
+    }
   };
 
   const handleDeleteGame = async (id) => {
@@ -52,160 +101,176 @@ const AdminDashboard = () => {
           </h1>
 
           {/* Create Game Form */}
-          <div className=" flex flex-col gap-6 mb-6">
+          <div className="flex flex-col gap-6 mb-6">
             <h2 className="text-2xl text-white font-semibold text-center">
               Create New Game
             </h2>
 
-            {/* Title */}
-            <div className="mb-4">
-              <Label className="text-white">Title</Label>
-              <Input
-                type="text"
-                value={newGameData.title}
-                onChange={(e) =>
-                  setNewGameData({ ...newGameData, title: e.target.value })
-                }
-                placeholder="Enter Game Title"
-                className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
-              />
-            </div>
-
-            {/* Genre */}
-            <div className="mb-4">
-              <Label className="text-white">Genre</Label>
-              <Input
-                type="text"
-                value={newGameData.genre}
-                onChange={(e) =>
-                  setNewGameData({ ...newGameData, genre: e.target.value })
-                }
-                placeholder="Enter Game Genre"
-                className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
-              />
-            </div>
-
-            {/* Description */}
-            <div className="mb-4">
-              <Label className="text-white">Description</Label>
-              <Textarea
-                value={newGameData.description}
-                onChange={(e) =>
-                  setNewGameData({
-                    ...newGameData,
-                    description: e.target.value,
-                  })
-                }
-                placeholder="Enter Game Description"
-                className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
-              />
-            </div>
-
-            {/* Price */}
-            <div className="mb-4">
-              <Label className="text-white">Price</Label>
-              <Input
-                type="number"
-                value={newGameData.price}
-                onChange={(e) =>
-                  setNewGameData({
-                    ...newGameData,
-                    price: parseFloat(e.target.value),
-                  })
-                }
-                placeholder="Enter Game Price"
-                className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
-              />
-            </div>
-
-            {/* System Requirements */}
-            <label className="text-white">System Requirements</label>
-            <div className="space-y-4">
-              {/* CPU */}
-              <div>
-                <Label className="text-white">CPU</Label>
-                <Input
-                  type="text"
-                  value={newGameData.systemRequirements.cpu}
-                  onChange={(e) =>
-                    setNewGameData({
-                      ...newGameData,
-                      systemRequirements: {
-                        ...newGameData.systemRequirements,
-                        cpu: e.target.value,
-                      },
-                    })
-                  }
-                  placeholder="Enter CPU"
-                  className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
-                />
-              </div>
-              {/* GPU */}
-              <div>
-                <Label className="text-white">GPU</Label>
-                <Input
-                  type="text"
-                  value={newGameData.systemRequirements.gpu}
-                  onChange={(e) =>
-                    setNewGameData({
-                      ...newGameData,
-                      systemRequirements: {
-                        ...newGameData.systemRequirements,
-                        gpu: e.target.value,
-                      },
-                    })
-                  }
-                  placeholder="Enter GPU"
-                  className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
-                />
-              </div>
-              {/* RAM */}
-              <div>
-                <Label className="text-white">RAM</Label>
-                <Input
-                  type="text"
-                  value={newGameData.systemRequirements.ram}
-                  onChange={(e) =>
-                    setNewGameData({
-                      ...newGameData,
-                      systemRequirements: {
-                        ...newGameData.systemRequirements,
-                        ram: e.target.value,
-                      },
-                    })
-                  }
-                  placeholder="Enter RAM"
-                  className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
-                />
-              </div>
-              {/* Storage */}
-              <div>
-                <Label className="text-white">Storage</Label>
-                <Input
-                  type="text"
-                  value={newGameData.systemRequirements.storage}
-                  onChange={(e) =>
-                    setNewGameData({
-                      ...newGameData,
-                      systemRequirements: {
-                        ...newGameData.systemRequirements,
-                        storage: e.target.value,
-                      },
-                    })
-                  }
-                  placeholder="Enter Storage"
-                  className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
-                />
-              </div>
-            </div>
-
-            {/* Submit Button */}
-            <ButtonComponent
-              onClick={handleCreateGame}
-              className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg transition"
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleCreateGame();
+              }}
             >
-              Create Game
-            </ButtonComponent>
+              {/* Title */}
+              <div className="mb-4">
+                <Label className="text-white">Title</Label>
+                <Input
+                  type="text"
+                  value={newGameData.title}
+                  onChange={(e) =>
+                    setNewGameData({ ...newGameData, title: e.target.value })
+                  }
+                  placeholder="Enter Game Title"
+                  className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                />
+              </div>
+
+              {/* Genre */}
+              <div className="mb-4">
+                <Label className="text-white">Genre</Label>
+                <Input
+                  type="text"
+                  value={newGameData.genre}
+                  onChange={(e) =>
+                    setNewGameData({ ...newGameData, genre: e.target.value })
+                  }
+                  placeholder="Enter Game Genre"
+                  className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                />
+              </div>
+
+              {/* Description */}
+              <div className="mb-4">
+                <Label className="text-white">Description</Label>
+                <Textarea
+                  value={newGameData.description}
+                  onChange={(e) =>
+                    setNewGameData({
+                      ...newGameData,
+                      description: e.target.value,
+                    })
+                  }
+                  placeholder="Enter Game Description"
+                  className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                />
+              </div>
+
+              {/* Price */}
+              <div className="mb-4">
+                <Label className="text-white">Price</Label>
+                <Input
+                  type="number"
+                  value={newGameData.price}
+                  onChange={(e) =>
+                    setNewGameData({
+                      ...newGameData,
+                      price: parseFloat(e.target.value),
+                    })
+                  }
+                  placeholder="Enter Game Price"
+                  className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                />
+              </div>
+
+              {/* System Requirements */}
+              <label className="text-white">System Requirements</label>
+              <div className="space-y-4">
+                {/* CPU */}
+                <div>
+                  <Label className="text-white">CPU</Label>
+                  <Input
+                    type="text"
+                    value={newGameData.systemRequirements.cpu}
+                    onChange={(e) =>
+                      setNewGameData({
+                        ...newGameData,
+                        systemRequirements: {
+                          ...newGameData.systemRequirements,
+                          cpu: e.target.value,
+                        },
+                      })
+                    }
+                    placeholder="Enter CPU"
+                    className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                  />
+                </div>
+                {/* GPU */}
+                <div>
+                  <Label className="text-white">GPU</Label>
+                  <Input
+                    type="text"
+                    value={newGameData.systemRequirements.gpu}
+                    onChange={(e) =>
+                      setNewGameData({
+                        ...newGameData,
+                        systemRequirements: {
+                          ...newGameData.systemRequirements,
+                          gpu: e.target.value,
+                        },
+                      })
+                    }
+                    placeholder="Enter GPU"
+                    className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                  />
+                </div>
+                {/* RAM */}
+                <div>
+                  <Label className="text-white">RAM</Label>
+                  <Input
+                    type="text"
+                    value={newGameData.systemRequirements.ram}
+                    onChange={(e) =>
+                      setNewGameData({
+                        ...newGameData,
+                        systemRequirements: {
+                          ...newGameData.systemRequirements,
+                          ram: e.target.value,
+                        },
+                      })
+                    }
+                    placeholder="Enter RAM"
+                    className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                  />
+                </div>
+                {/* Storage */}
+                <div>
+                  <Label className="text-white">Storage</Label>
+                  <Input
+                    type="text"
+                    value={newGameData.systemRequirements.storage}
+                    onChange={(e) =>
+                      setNewGameData({
+                        ...newGameData,
+                        systemRequirements: {
+                          ...newGameData.systemRequirements,
+                          storage: e.target.value,
+                        },
+                      })
+                    }
+                    placeholder="Enter Storage"
+                    className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <Label className="text-white">Image</Label>
+                <Input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="mt-2 w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                />
+              </div>
+
+              {/* Submit Button */}
+              <ButtonComponent
+                type="submit"
+                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg transition mt-8"
+              >
+                Create Game
+              </ButtonComponent>
+            </form>
           </div>
         </div>
       </section>
@@ -224,8 +289,8 @@ const AdminDashboard = () => {
                 <div
                   className="relative w-full h-40 bg-cover bg-center"
                   style={{
-                    backgroundImage: `url(${
-                      game.image || "https://via.placeholder.com/400"
+                    backgroundImage: `url(http://localhost:3000/uploads/${
+                      game.image || "placeholder.jpg"
                     })`,
                   }}
                 >

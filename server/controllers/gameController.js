@@ -1,8 +1,10 @@
 import Game from "../models/Game.js";
+import { upload } from "../utils/multer.js";
 
 // Create a game (admin only)
 export const createGame = async (req, res) => {
   const { title, genre, description, price, systemRequirements } = req.body;
+  const image = req.file ? req.file.filename : null;
 
   try {
     if (!title || !genre || !price || !systemRequirements) {
@@ -17,6 +19,7 @@ export const createGame = async (req, res) => {
       description: description || "",
       price,
       systemRequirements,
+      image,
     });
 
     const savedGame = await newGame.save();
@@ -36,10 +39,15 @@ export const createGame = async (req, res) => {
 // Update a game (admin only)
 export const updateGame = async (req, res) => {
   const { id } = req.params;
+  const image = req.file ? req.file.filename : null;
   try {
-    const updatedGame = await Game.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
+    const updatedGame = await Game.findByIdAndUpdate(
+      id,
+      { ...req.body, image },
+      {
+        new: true,
+      }
+    );
     res.json(updatedGame);
   } catch (error) {
     console.log(error);

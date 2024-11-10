@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-// Registering User or Admin based on Role
 export const register = async (req, res) => {
   const { username, email, password, role, adminSecret } = req.body;
 
@@ -45,7 +44,6 @@ export const register = async (req, res) => {
   }
 };
 
-// Login User
 export const login = async (req, res) => {
   const { email, password } = req.body;
 

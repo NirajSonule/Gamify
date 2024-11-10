@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   const handleAdminClick = () => {
-    setShowAdminSecret((prev) => !prev); // Toggle the display of Admin Secret
+    setShowAdminSecret((prev) => !prev);
   };
 
   return (
@@ -46,13 +46,10 @@ const Login = () => {
       className="relative w-full min-h-screen bg-cover bg-center backdrop-blur-sm"
       style={{ backgroundImage: `url(${login_img})`, loading: "lazy" }}
     >
-      {/* Dark overlay for better contrast */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      {/* Blur effect */}
       <div className="absolute inset-0 bg-cover bg-center filter blur-lg"></div>
 
-      {/* Centered form content */}
       <div className="absolute flex items-center justify-center w-full h-full text-white">
         <form
           onSubmit={handleSubmit}
@@ -94,7 +91,6 @@ const Login = () => {
             />
           </div>
 
-          {/* Admin Secret input that only shows when the "Admin" link is clicked */}
           <div
             className={`transition-all duration-300 ease-in-out ${
               showAdminSecret ? "opacity-100" : "opacity-0 pointer-events-none"
