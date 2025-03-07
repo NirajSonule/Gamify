@@ -126,7 +126,7 @@ const GameDetails = () => {
                     <span
                       key={index}
                       className={
-                        index < rating.rating
+                        index < rating.score
                           ? "text-yellow-500"
                           : "text-gray-600"
                       }
@@ -135,7 +135,7 @@ const GameDetails = () => {
                     </span>
                   ))}
                   <span className="ml-2 text-gray-400">
-                    - {rating.username}
+                    - {rating.userId.username}
                   </span>
                 </div>
                 <p className="mt-2 text-gray-300">{rating.comment}</p>

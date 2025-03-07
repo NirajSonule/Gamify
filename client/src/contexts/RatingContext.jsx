@@ -15,7 +15,7 @@ export const RatingProvider = ({ children }) => {
     }
     try {
       const response = await axios.post(
-        `http://localhost:3000/games/${gameId}/rating`,
+        `${import.meta.env.VITE_API_URL}/games/${gameId}/rating`,
         ratingData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -30,7 +30,7 @@ export const RatingProvider = ({ children }) => {
   const getGameRatings = async (gameId) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/games/${gameId}/ratings`,
+        `${import.meta.env.VITE_API_URL}/games/${gameId}/ratings`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }

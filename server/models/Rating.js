@@ -12,7 +12,7 @@ const ratingSchema = new mongoose.Schema(
     },
     score: {
       type: Number,
-      min: 0,
+      min: 1,
       max: 5,
     },
     comment: {

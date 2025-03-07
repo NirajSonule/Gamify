@@ -13,7 +13,7 @@ export const GameProvider = ({ children }) => {
       const queryParams = new URLSearchParams(filters).toString();
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:3000/games?${queryParams}`,
+        `${import.meta.env.VITE_API_URL}/games?${queryParams}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -31,9 +31,12 @@ export const GameProvider = ({ children }) => {
   const getGame = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`http://localhost:3000/games/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/games/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setGame(response.data);
     } catch (error) {
       console.error(error.response.data.message);
@@ -59,7 +62,7 @@ export const GameProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/games",
+        `${import.meta.env.VITE_API_URL}/games`,
         gameData,
         {
           headers: {
@@ -96,7 +99,7 @@ export const GameProvider = ({ children }) => {
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/games/${id}`,
+        `${import.meta.env.VITE_API_URL}/games/${id}`,
         formData,
         {
           headers: {
@@ -117,9 +120,12 @@ export const GameProvider = ({ children }) => {
 
   const deleteGame = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/games/${id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
+      const response = await axios.delete(
+        `${import.meta.env.VITE_API_URL}/games/${id}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       console.log(response.data.message);
       getAllGames();
     } catch (error) {
