@@ -1,30 +1,33 @@
-import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import { verifyToken } from "../utils/jwt.js";
 
-const authMiddleware = async (req, res, next) => {
+const isAuthenticated = async (req, res, next) => {
+  const token = req.cookies.token;
+
   try {
-    const token = req.header("Authorization").replace("Bearer ", "");
     if (!token) {
-      return res.status(401).json({ message: "Authorization token required" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Not authenticated" });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = verifyToken(token);
+    if (!decoded) {
+      return res.status(401).json({ success: false, message: "Invalid token" });
+    }
 
-    const user = await User.findById(decoded.userId);
+    const user = await User.findById(decoded.id).select("-password");
     if (!user) {
-      return res.status(401).json({ message: "User not found" });
+      return res
+        .status(401)
+        .json({ success: false, message: "User not found" });
     }
 
-    req.user = {
-      userId: decoded.userId,
-      role: decoded.role,
-      username: decoded.username,
-    };
+    req.user = user;
     next();
   } catch (error) {
-    console.error(error);
-    res.status(401).json({ message: "Not authenticated" });
+    res.status(500).json({ success: false, message: "Authentication error" });
   }
 };
 
-export default authMiddleware;
+export default isAuthenticated;

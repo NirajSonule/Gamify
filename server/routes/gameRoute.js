@@ -6,29 +6,29 @@ import {
   getGame,
   getAllGames,
 } from "../controllers/gameController.js";
-import authMiddleware from "../middlewares/authMiddleware.js";
 import adminMiddleware from "../middlewares/adminMiddleware.js";
 import { upload } from "../utils/multer.js";
+import isAuthenticated from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 router.post(
   "/games",
-  authMiddleware,
+  isAuthenticated,
   adminMiddleware,
   upload.single("image"),
   createGame
 );
 router.put(
   "/games/:id",
-  authMiddleware,
+  isAuthenticated,
   adminMiddleware,
   upload.single("image"),
   updateGame
 );
-router.delete("/games/:id", authMiddleware, adminMiddleware, deleteGame);
+router.delete("/games/:id", isAuthenticated, adminMiddleware, deleteGame);
 
-router.get("/games/:id", authMiddleware, getGame);
-router.get("/games", authMiddleware, getAllGames);
+router.get("/games/:id", isAuthenticated, getGame);
+router.get("/games", isAuthenticated, getAllGames);
 
 export default router;
