@@ -1,17 +1,21 @@
 import Game from "../models/Game.js";
-import { upload } from "../utils/multer.js";
+import cloudinary from "../config/cloudinary.js";
 
 // Create a game (admin only)
 export const createGame = async (req, res) => {
-  const { title, genre, description, price, systemRequirements } = req.body;
-  const image = req.file ? req.file.filename : null;
+  const { title, genre, description, price, systemRequirements, image } =
+    req.body;
 
   try {
-    if (!title || !genre || !price || !systemRequirements) {
+    if (!title || !genre || !price || !systemRequirements || !image) {
       return res.status(400).json({
         message: "Missing required fields",
       });
     }
+
+    const uploadResponse = await cloudinary.uploader.upload(image, {
+      folder: "gamify",
+    });
 
     const newGame = new Game({
       title,
@@ -19,7 +23,7 @@ export const createGame = async (req, res) => {
       description: description || "",
       price,
       systemRequirements,
-      image,
+      image: uploadResponse.secure_url,
     });
 
     const savedGame = await newGame.save();
@@ -31,7 +35,7 @@ export const createGame = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Server Error",
+      message: "Internal Server Error",
     });
   }
 };
@@ -39,20 +43,44 @@ export const createGame = async (req, res) => {
 // Update a game (admin only)
 export const updateGame = async (req, res) => {
   const { id } = req.params;
-  const image = req.file ? req.file.filename : null;
+  const { title, genre, description, price, systemRequirements, image } =
+    req.body;
+
   try {
-    const updatedGame = await Game.findByIdAndUpdate(
-      id,
-      { ...req.body, image },
-      {
-        new: true,
-      }
-    );
-    res.json(updatedGame);
+    const game = await Game.findById(id);
+    if (!game) {
+      return res.status(404).json({ message: "Game not found" });
+    }
+
+    let imageUrl = game.image;
+    if (image) {
+      const uploadResponse = await cloudinary.uploader.upload(image, {
+        folder: "gamify",
+      });
+      imageUrl = uploadResponse.secure_url;
+    }
+
+    game.title = title !== undefined ? title : game.title;
+    game.genre = genre !== undefined ? genre : game.genre;
+    game.description =
+      description !== undefined ? description : game.description;
+    game.price = price !== undefined ? price : game.price;
+    game.systemRequirements =
+      systemRequirements !== undefined
+        ? systemRequirements
+        : game.systemRequirements;
+    game.image = imageUrl;
+
+    const updatedGame = await game.save();
+
+    res.status(200).json({
+      message: "Game updated successfully",
+      game: updatedGame,
+    });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({
-      message: "Error updating game",
+      message: "Internal Server Error",
     });
   }
 };
@@ -72,6 +100,7 @@ export const deleteGame = async (req, res) => {
     });
   }
 };
+
 // Get game by gameId
 export const getGame = async (req, res) => {
   const { id } = req.params;
