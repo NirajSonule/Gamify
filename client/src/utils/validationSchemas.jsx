@@ -21,7 +21,7 @@ export const gameSchema = z.object({
     ram: z.string().min(1, "RAM requirement is required"),
     storage: z.string().min(1, "Storage requirement is required"),
   }),
-  image: z.instanceof(File).optional(),
+  image: z.string().optional(),
 });
 
 // Rating Validation Schema

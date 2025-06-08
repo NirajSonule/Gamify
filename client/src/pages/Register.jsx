@@ -3,8 +3,9 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Input } from "@/components/ui/input";
 import ButtonComponent from "@/components/Button";
 import login_img from "../assets/login_register/register_img.jpg";
+import { authSchema } from "@/utils/validationSchemas";
 
-const Login = () => {
+const Register = () => {
   const { register } = useAuth();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -12,13 +13,18 @@ const Login = () => {
   const [adminSecret, setAdminSecret] = useState("");
   const [showAdminSecret, setShowAdminSecret] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [formErrors, setFormErrors] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setErrorMsg("");
+    setFormErrors({});
 
     const role = adminSecret ? "admin" : "user";
 
-    const userData = {
+    const formData = {
       username,
       email,
       password,
@@ -26,12 +32,34 @@ const Login = () => {
       adminSecret,
     };
 
-    setIsLoading(true);
+    const validation = authSchema.safeParse(formData);
+
+    if (!validation.success) {
+      const formatted = Object.fromEntries(
+        Object.entries(validation.error.format()).map(([key, value]) => [
+          key,
+          value?._errors?.[0],
+        ])
+      );
+      setFormErrors(formatted);
+      setIsLoading(false);
+      return;
+    }
 
     try {
-      await register(userData);
+      const result = await register(
+        username,
+        email,
+        password,
+        role,
+        adminSecret
+      );
+      if (!result.success) {
+        setErrorMsg(result.message);
+      }
     } catch (error) {
-      console.error("Registration failed:", error);
+      console.log(error);
+      setErrorMsg("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -47,7 +75,6 @@ const Login = () => {
       style={{ backgroundImage: `url(${login_img})`, loading: "lazy" }}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
-
       <div className="absolute inset-0 bg-cover bg-center filter blur-lg"></div>
 
       <div className="absolute flex items-center justify-center w-full h-full text-white">
@@ -55,10 +82,13 @@ const Login = () => {
           onSubmit={handleSubmit}
           className="flex flex-col gap-4 w-full max-w-md p-6 rounded-lg shadow-lg"
         >
-          {/* Heading */}
           <h2 className="text-2xl sm:text-4xl text-center font-bold mb-6">
             New Account
           </h2>
+
+          {errorMsg && (
+            <p className="text-red-400 text-center font-medium">{errorMsg}</p>
+          )}
 
           <div>
             <label className="text-white">Username:</label>
@@ -69,7 +99,11 @@ const Login = () => {
               placeholder="Enter your username"
               className="mt-2 w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
+            {formErrors.username && (
+              <p className="text-red-400 text-sm">{formErrors.username}</p>
+            )}
           </div>
+
           <div>
             <label className="text-white">Email:</label>
             <Input
@@ -79,7 +113,11 @@ const Login = () => {
               placeholder="john@example.com"
               className="mt-2 w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
+            {formErrors.email && (
+              <p className="text-red-400 text-sm">{formErrors.email}</p>
+            )}
           </div>
+
           <div>
             <label className="text-white">Password:</label>
             <Input
@@ -89,26 +127,26 @@ const Login = () => {
               placeholder="Enter your password"
               className="mt-2 w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
-          </div>
-
-          <div
-            className={`transition-all duration-300 ease-in-out ${
-              showAdminSecret ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-          >
-            {showAdminSecret && (
-              <div>
-                <label className="text-white">Admin Secret:</label>
-                <Input
-                  type="password"
-                  value={adminSecret}
-                  onChange={(e) => setAdminSecret(e.target.value)}
-                  placeholder="Enter your admin secret"
-                  className="mt-2 w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                />
-              </div>
+            {formErrors.password && (
+              <p className="text-red-400 text-sm">{formErrors.password}</p>
             )}
           </div>
+
+          {showAdminSecret && (
+            <div>
+              <label className="text-white">Admin Secret:</label>
+              <Input
+                type="password"
+                value={adminSecret}
+                onChange={(e) => setAdminSecret(e.target.value)}
+                placeholder="Enter your admin secret"
+                className="mt-2 w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+              {formErrors.adminSecret && (
+                <p className="text-red-400 text-sm">{formErrors.adminSecret}</p>
+              )}
+            </div>
+          )}
 
           <div className="flex justify-between w-full mt-4 items-end gap-24">
             <ButtonComponent
@@ -132,4 +170,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

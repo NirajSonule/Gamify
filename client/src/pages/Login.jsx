@@ -1,26 +1,53 @@
-// Login.jsx
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import ButtonComponent from "@/components/Button";
 import { Input } from "@/components/ui/input";
 import login_img from "../assets/login_register/login_img.jpg";
+import { authSchema } from "@/utils/validationSchemas";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const credentials = { email, password };
-
     setIsLoading(true);
+    setFormErrors({});
+    setErrorMsg("");
+
+    const credentials = { email, password };
+    const validation = authSchema
+      .pick({ email: true, password: true })
+      .safeParse(credentials);
+
+    if (!validation.success) {
+      const formatted = Object.fromEntries(
+        Object.entries(validation.error.format()).map(([key, value]) => [
+          key,
+          value?._errors?.[0],
+        ])
+      );
+      setFormErrors(formatted);
+      setIsLoading(false);
+      return;
+    }
 
     try {
-      await login(credentials);
+      const result = await login(email, password);
+      if (!result.success) {
+        setErrorMsg(result.message);
+      }
+
+      navigate("/explore");
     } catch (error) {
-      console.error("Login failed:", error);
+      console.log(error);
+      setErrorMsg("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -32,7 +59,6 @@ const Login = () => {
       style={{ backgroundImage: `url(${login_img})`, loading: "lazy" }}
     >
       <div className="absolute inset-0 bg-black opacity-70"></div>
-
       <div className="absolute inset-0 bg-cover bg-center filter blur-lg"></div>
 
       <div className="absolute flex items-center justify-center w-full h-full text-white">
@@ -43,6 +69,11 @@ const Login = () => {
           <h2 className="text-2xl sm:text-4xl text-center font-bold mb-6">
             Welcome back! 👋
           </h2>
+
+          {errorMsg && (
+            <p className="text-red-400 text-center font-medium">{errorMsg}</p>
+          )}
+
           <div>
             <label className="text-white">Email:</label>
             <Input
@@ -52,7 +83,11 @@ const Login = () => {
               placeholder="john@example.com"
               className="mt-2 w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
+            {formErrors.email && (
+              <p className="text-red-400 text-sm">{formErrors.email}</p>
+            )}
           </div>
+
           <div>
             <label className="text-white">Password:</label>
             <Input
@@ -62,7 +97,11 @@ const Login = () => {
               placeholder="Enter your password"
               className="mt-2 w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
+            {formErrors.password && (
+              <p className="text-red-400 text-sm">{formErrors.password}</p>
+            )}
           </div>
+
           <ButtonComponent
             isLoading={isLoading}
             type="submit"

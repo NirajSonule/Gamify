@@ -20,7 +20,7 @@ const GameCard = ({ id, title, genre, price, description, image }) => {
     <Card className="w-[320px] rounded-2xl bg-gray-900 text-white overflow-hidden shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:translate-y-[-5px]">
       <div className="relative h-48 overflow-hidden">
         <img
-          src={`http://localhost:3000/uploads/${image}`}
+          src={`${image}`}
           alt="Game Image"
           className="object-cover w-full h-full opacity-80 transition-opacity duration-300 hover:opacity-100"
         />

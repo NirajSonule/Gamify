@@ -22,7 +22,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 
 //Api Routes
@@ -30,6 +30,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api", gameRoutes);
 app.use("/api", ratingRoutes);
 
-const server = app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`Server is running on port ${process.env.PORT || 3000}`);
 });

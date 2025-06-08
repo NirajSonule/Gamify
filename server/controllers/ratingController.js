@@ -5,7 +5,7 @@ import Game from "../models/Game.js";
 export const addRating = async (req, res) => {
   const { score, comment } = req.body;
   const { gameId } = req.params;
-  const { userId } = req.user;
+  const { userId } = req.user._id;
 
   try {
     const game = await Game.findById(gameId);
