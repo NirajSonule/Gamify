@@ -5,7 +5,7 @@ import {
   PuzzlePieceIcon,
 } from "@heroicons/react/24/solid";
 
-import frontendDevImage from "../assets/team/frontend-dev.jpg";
+import frontendDevImage from "../assets/team/frontend-dev.png";
 
 const About = () => {
   return (
