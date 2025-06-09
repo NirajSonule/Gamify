@@ -20,7 +20,7 @@ export const GameProvider = ({ children }) => {
     try {
       const queryParams = new URLSearchParams(filters).toString();
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}api/games?${queryParams}`,
+        `${import.meta.env.VITE_API_URL}/api/games?${queryParams}`,
         { withCredentials: true }
       );
       setGames(response.data);
@@ -32,7 +32,7 @@ export const GameProvider = ({ children }) => {
   const getGame = useCallback(async (id) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}api/games/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/games/${id}`,
         { withCredentials: true }
       );
       setGame(response.data);
@@ -50,7 +50,7 @@ export const GameProvider = ({ children }) => {
       }
       try {
         const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}api/games`,
+          `${import.meta.env.VITE_API_URL}/api/games`,
           gameData,
           { withCredentials: true }
         );
@@ -76,7 +76,7 @@ export const GameProvider = ({ children }) => {
       }
       try {
         const response = await axios.put(
-          `${import.meta.env.VITE_API_URL}api/games/${id}`,
+          `${import.meta.env.VITE_API_URL}/api/games/${id}`,
           gameData,
           { withCredentials: true }
         );
@@ -97,7 +97,7 @@ export const GameProvider = ({ children }) => {
     async (id) => {
       try {
         const response = await axios.delete(
-          `${import.meta.env.VITE_API_URL}api/games/${id}`,
+          `${import.meta.env.VITE_API_URL}/api/games/${id}`,
           { withCredentials: true }
         );
         console.log(response.data.message);
