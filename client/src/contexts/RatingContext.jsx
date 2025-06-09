@@ -21,7 +21,7 @@ export const RatingProvider = ({ children }) => {
     }
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}api/games/${gameId}/rating`,
+        `${import.meta.env.VITE_API_URL}/api/games/${gameId}/rating`,
         ratingData,
         { withCredentials: true }
       );
@@ -34,7 +34,7 @@ export const RatingProvider = ({ children }) => {
   const getGameRatings = useCallback(async (gameId) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}api/games/${gameId}/ratings`,
+        `${import.meta.env.VITE_API_URL}/api/games/${gameId}/ratings`,
         { withCredentials: true }
       );
       setRatings(response.data.ratings);

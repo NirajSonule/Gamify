@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
   ) => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}api/auth/register`,
+        `${import.meta.env.VITE_API_URL}/api/auth/register`,
         { username, email, password, role, adminSecret },
         { withCredentials: true }
       );
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}api/auth/login`,
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
         { email, password },
         { withCredentials: true }
       );
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await axios.post(
-        `${import.meta.env.VITE_API_URL}api/auth/logout`,
+        `${import.meta.env.VITE_API_URL}/api/auth/logout`,
         {},
         {
           withCredentials: true,
