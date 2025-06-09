@@ -6,8 +6,6 @@ import {
 } from "@heroicons/react/24/solid";
 
 import frontendDevImage from "../assets/team/frontend-dev.jpg";
-import backendDevImage from "../assets/team/backend-dev.jpg";
-import researchDevImage from "../assets/team/research-dev.jpeg";
 
 const About = () => {
   return (
@@ -86,61 +84,17 @@ const About = () => {
                 />
               </div>
               <CardTitle className="text-xl font-semibold">
-                Omkar Gaud
+                Niraj Sonule
               </CardTitle>
-              <p className="text-sm">Frontend Developer</p>
+              <p className="text-sm">Fullstack Developer</p>
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 mt-8">
-                Omkar is the mastermind behind the sleek and user-friendly
-                interface. He ensures the app is intuitive and engaging for
-                every user.
-              </p>
-            </CardContent>
-          </Card>
-
-          {/* Backend Developer */}
-          <Card className="bg-gray-800 text-white border border-gray-700 overflow-hidden transform transition-transform hover:scale-105 hover:shadow-lg hover:border-violet-500">
-            <CardHeader className="bg-gray-500 text-white text-center relative group">
-              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 group-hover:scale-125 group-hover:opacity-100 transition-all duration-300">
-                <img
-                  src={backendDevImage}
-                  alt="Backend Developer"
-                  className="object-cover w-full h-full transition-all duration-500 group-hover:scale-150 group-hover:object-cover"
-                />
-              </div>
-              <CardTitle className="text-xl font-semibold">
-                Pranali Dalbanjan
-              </CardTitle>
-              <p className="text-sm">Backend Developer</p>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-300 mt-8">
-                Pranali is responsible for managing databases and implementing
-                the APIs that make Gamify’s recommendations so powerful.
-              </p>
-            </CardContent>
-          </Card>
-
-          {/* Research and Gathering Developer */}
-          <Card className="bg-gray-800 text-white border border-gray-700 overflow-hidden transform transition-transform hover:scale-105 hover:shadow-lg hover:border-violet-500">
-            <CardHeader className="bg-gray-500 text-white text-center relative group">
-              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 group-hover:scale-125 group-hover:opacity-100 transition-all duration-300">
-                <img
-                  src={researchDevImage}
-                  alt="Research Developer"
-                  className="object-cover w-full h-full transition-all duration-500 group-hover:scale-150 group-hover:object-cover"
-                />
-              </div>
-              <CardTitle className="text-xl font-semibold">
-                Shubham Niwate
-              </CardTitle>
-              <p className="text-sm">Research & Gathering Developer</p>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-300 mt-8">
-                Shubham focuses on gathering the best gaming data and ensuring
-                the recommendation algorithm is accurate and relevant.
+                Niraj Sonule is a fullstack developer skilled in React, Node.js,
+                Express, and MongoDB. He built this app from the ground up,
+                crafting both the front-end interface and the back-end
+                architecture to ensure a seamless, intuitive, and engaging user
+                experience.
               </p>
             </CardContent>
           </Card>
