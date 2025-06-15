@@ -72,8 +72,32 @@ const About = () => {
         <h2 className="text-3xl font-semibold text-center text-amber-500 mb-12">
           Meet the Developers
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-12">
           {/* Frontend Developer */}
+          <Card className="bg-gray-800 text-white border border-gray-700 overflow-hidden transform transition-transform hover:scale-105 hover:shadow-lg hover:border-violet-500">
+            <CardHeader className="bg-gray-500 text-white text-center relative group">
+              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 group-hover:scale-125 group-hover:opacity-100 transition-all duration-300">
+                <img
+                  src={frontendDevImage}
+                  alt="Frontend Developer"
+                  className="object-cover w-full h-full transition-all duration-500 group-hover:scale-150 group-hover:object-cover"
+                />
+              </div>
+              <CardTitle className="text-xl font-semibold">
+                Omkar Gaud
+              </CardTitle>
+              <p className="text-sm">Fullstack Developer</p>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-300 mt-8">
+                Omkar Gaud is a fullstack developer skilled in React, Node.js,
+                Express, and MongoDB. He built this app from the ground up,
+                crafting both the front-end interface and the back-end
+                architecture to ensure a seamless, intuitive, and engaging user
+                experience.
+              </p>
+            </CardContent>
+          </Card>
           <Card className="bg-gray-800 text-white border border-gray-700 overflow-hidden transform transition-transform hover:scale-105 hover:shadow-lg hover:border-violet-500">
             <CardHeader className="bg-gray-500 text-white text-center relative group">
               <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 group-hover:scale-125 group-hover:opacity-100 transition-all duration-300">
